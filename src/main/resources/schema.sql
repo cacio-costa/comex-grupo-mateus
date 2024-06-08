@@ -24,6 +24,7 @@ create table produto (
     id bigint not null auto_increment,
     nome varchar(100),
     preco decimal(10,2),
+    descricao varchar(1000),
 
     primary key (id)
 );

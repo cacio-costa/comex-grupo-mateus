@@ -110,4 +110,28 @@ public class CategoriaDao {
             throw new RuntimeException("Erro ao pesquisar categoria por ID", e);
         }
     }
+
+    public Categoria buscaPorId(long id) {
+        String sql = "select * from categoria where id = ?";
+
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        try (Connection conexao = connectionFactory.criaConexao()) {
+            PreparedStatement preparoDoComando = conexao.prepareStatement(sql);
+            preparoDoComando.setLong(1, id);
+
+            ResultSet resultSet = preparoDoComando.executeQuery();
+
+            Categoria possivelCategoria = null;
+            if (resultSet.next()) {
+                possivelCategoria = montaCategoria(resultSet);
+            }
+
+            preparoDoComando.close();
+            resultSet.close();
+
+            return possivelCategoria;
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao pesquisar categoria por ID", e);
+        }
+    }
 }
