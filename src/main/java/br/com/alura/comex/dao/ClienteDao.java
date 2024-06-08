@@ -1,6 +1,7 @@
 package br.com.alura.comex.dao;
 
 import br.com.alura.comex.banco.ConnectionFactory;
+import br.com.alura.comex.banco.DatabaseUtils;
 import br.com.alura.comex.model.Cliente;
 
 import java.sql.*;
@@ -56,7 +57,7 @@ public class ClienteDao {
                      """;
 
         try (Connection conexao = new ConnectionFactory().criaConexao()) {
-            PreparedStatement comando = conexao.prepareStatement(sql);
+            PreparedStatement comando = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             comando.setString(1, cliente.getNome());
             comando.setString(2, cliente.getEmail());
             comando.setString(3, cliente.getTelefone());
@@ -66,6 +67,8 @@ public class ClienteDao {
             comando.setString(7, cliente.getCidade());
             comando.setString(8, cliente.getEstado());
             comando.setString(9, cliente.getCep());
+
+            cliente.setId(DatabaseUtils.recuperaIdGerado(comando));
 
             comando.execute();
             comando.close();
