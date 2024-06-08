@@ -1,6 +1,5 @@
-package br.com.alura.comex.teste;
+package br.com.alura.comex.teste.cliente;
 
-import br.com.alura.comex.dao.ClienteDao;
 import br.com.alura.comex.model.Cliente;
 import br.com.alura.comex.service.ClienteService;
 
