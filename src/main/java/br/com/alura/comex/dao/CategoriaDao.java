@@ -41,11 +41,12 @@ public class CategoriaDao {
     }
 
     public void cadastra(Categoria categoria) {
-        String sql = "insert into categoria (nome) values (?)";
+        String sql = "insert into categoria (nome, descricao) values (?, ?)";
 
         try (Connection conexao = new ConnectionFactory().criaConexao()) {
             PreparedStatement comando = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             comando.setString(1, categoria.getNome());
+            comando.setString(2, categoria.getDescricao());
 
             comando.execute();
 

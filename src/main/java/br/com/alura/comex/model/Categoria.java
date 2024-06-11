@@ -1,9 +1,16 @@
 package br.com.alura.comex.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "categoria")
 public class Categoria {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    private String descricao;
 
     public Long getId() {
         return id;
@@ -19,6 +26,14 @@ public class Categoria {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public String toString() {
